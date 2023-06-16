@@ -3,7 +3,13 @@
 <%- include('partials/head.ejs') %>
 
 <body>
-    <h1><%= title %></h1>
+    <h1 class="title"><%= title %></h1>
+
+    <%- include('partials/navbar.ejs') %>
+
+    <% if (typeof message !== 'undefined') { %>
+      <%= message %>
+    <% } %>
 
     <form class="form-container" action="/register/add" method="post">
         <div>

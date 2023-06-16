@@ -4,8 +4,16 @@
 <body>
     
     <h1 class="title"> <%= title %> </h1>
-    
+
     <%- include('partials/navbar.ejs') %>
+
+    <ul class="users-list">
+        <% users.forEach((user) => { %>
+            <li class="user">
+                <%= user.name %> - <%= user.email %> - Idade: <%= user.age %>
+            </li>
+        <% }) %>
+    </ul>
 
     <%- include('partials/foot.ejs') %>
 </body>
