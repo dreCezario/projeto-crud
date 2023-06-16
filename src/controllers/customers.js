@@ -33,17 +33,54 @@ const add = async (req, res) => {
     })
 }
 
-const listUsers = async (req, res) => {
+const list = async (req, res) => {
     const users = await CustomersModel.find()
 
-    res.render('listUsers', {
+    res.render('list', {
         title: 'Listagem de usuários',
         users: users,
+    })
+}
+
+const formEdit = async (req, res) => {
+    const { id } = req.query
+
+    const user = await CustomersModel.findById(id)
+
+    res.render('edit', {
+        title: 'Editar Usuário',
+        user,
+    })
+}
+
+const edit = async (req, res) => {
+    const {
+        name,
+        age,
+        email
+    } = req.body
+
+    const { id } = req.params
+
+    const user = await CustomersModel.findById(id)
+
+    user.name = name
+    user.age = age
+    user.email = email
+
+    user.save()
+
+    res.render('edit', {
+        title: 'Editar Usuário',
+        user,
+        message: 'Usuário alterado com sucesso!'
     })
 }
 
 module.exports = {
     index,
     add,
-    listUsers,
+    list,
+    formEdit,
+    edit,
 }
